@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Razor — A Simple Decision-Making Tool</title>
+  <meta name="description" content="Use decision-making razors to cut through noise, compare options, and make clearer choices.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+
+  <header class="hero">
+    <div class="eyebrow">SIMPLE DIGEST · DECISION TOOL</div>
+    <h1>Cut through the noise.<br><em>Make the decision.</em></h1>
+    <p>Describe the choice. The tool helps you find the relevant razor, pressure-test both options, and leave with a clear next step.</p>
+    <div class="hero-rule"><span></span> 42 decision-making razors <span></span></div>
+  </header>
+
+  <nav class="tabs" aria-label="Tool sections">
+    <button class="tab active" data-tab="decide">Make a decision</button>
+    <button class="tab" data-tab="library">Razor library</button>
+  </nav>
+
+  <section id="decide" class="tab-panel active">
+    <div class="card">
+      <div class="step"><span>01</span><div><h2>Name the decision</h2><p>Be specific. A vague decision creates vague thinking.</p></div></div>
+
+      <label for="decision">What are you deciding?</label>
+      <textarea id="decision" rows="3" placeholder="Should I take this job or keep looking?"></textarea>
+
+      <div class="options">
+        <div>
+          <label for="optionA">Option A</label>
+          <input id="optionA" placeholder="Take the job">
+        </div>
+        <div>
+          <label for="optionB">Option B</label>
+          <input id="optionB" placeholder="Keep looking">
+        </div>
+      </div>
+
+      <div class="context-row">
+        <div>
+          <label for="stakes">How important is this decision?</label>
+          <select id="stakes">
+            <option value="low">Low — easy to change</option>
+            <option value="medium" selected>Medium — meaningful</option>
+            <option value="high">High — major consequences</option>
+          </select>
+        </div>
+        <div>
+          <label for="time">When do you need to decide?</label>
+          <select id="time">
+            <option value="none">No deadline</option>
+            <option value="soon">Within a few days</option>
+            <option value="week">Within a week</option>
+            <option value="month">Within a month</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span>02</span><div><h2>Find the right razor</h2><p>You don't need all 42. You need the few that expose the real issue.</p></div></div>
+
+      <div id="recommendations" class="recommendations">
+        <div class="empty-state">Describe your decision above and we'll surface a few useful razors.</div>
+      </div>
+
+      <div class="manual-select">
+        <label for="razorSelect">Or choose a razor yourself</label>
+        <select id="razorSelect"></select>
+      </div>
+    </div>
+
+    <div class="card hidden" id="applyCard">
+      <div class="step"><span>03</span><div><h2>Apply the razor</h2><p id="razorIntro"></p></div></div>
+
+      <div class="selected-razor">
+        <div class="razor-number" id="selectedNumber">01</div>
+        <div>
+          <div class="selected-name" id="selectedName"></div>
+          <div class="selected-rule" id="selectedRule"></div>
+        </div>
+      </div>
+
+      <div id="questions" class="questions"></div>
+
+      <button id="addRazor" class="secondary">+ Add another razor</button>
+      <button id="evaluate" class="primary">Build my decision brief →</button>
+    </div>
+
+    <div class="card hidden" id="brief">
+      <div class="result-top">
+        <div>
+          <div class="eyebrow">YOUR DECISION BRIEF</div>
+          <h2 id="briefTitle">A clearer way to see the choice.</h2>
+        </div>
+        <button id="copyBrief" class="icon-btn" title="Copy brief">Copy</button>
+      </div>
+
+      <div class="option-compare">
+        <article><span>OPTION A</span><h3 id="briefA"></h3><p id="aSummary"></p></article>
+        <div class="vs">VS</div>
+        <article><span>OPTION B</span><h3 id="briefB"></h3><p id="bSummary"></p></article>
+      </div>
+
+      <div class="brief-section">
+        <span class="mini">RAZORS APPLIED</span>
+        <div id="appliedRazors" class="chips"></div>
+      </div>
+
+      <div class="brief-section">
+        <span class="mini">WHAT THE RAZORS EXPOSE</span>
+        <div id="insights"></div>
+      </div>
+
+      <div class="decision-note">
+        <span class="mini">NEXT STEP</span>
+        <h3 id="nextStep"></h3>
+        <p id="nextText"></p>
+      </div>
+
+      <div class="caveat">This tool structures your thinking. It does not know your values, facts, or future. For high-stakes decisions, verify the facts and consider qualified professional advice where appropriate.</div>
+
+      <button id="startOver" class="secondary full">Start another decision</button>
+    </div>
+  </section>
+
+  <section id="library" class="tab-panel">
+    <div class="card">
+      <div class="library-head">
+        <div><div class="eyebrow">THE LIBRARY</div><h2>42 razors, without the bloat.</h2></div>
+        <input id="search" class="search" placeholder="Search razors...">
+      </div>
+      <div id="libraryGrid" class="library-grid"></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built from the 42-rules framework in <strong>Simple Digest</strong>.</p>
+    <p class="fine">A razor is a rule of thumb, not a law. Use it to cut noise, not nuance.</p>
+  </footer>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
